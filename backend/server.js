@@ -7,12 +7,10 @@ const app = express();
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: false
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.options('*', cors());
-
 app.use(express.json());
 
 app.use(session({
