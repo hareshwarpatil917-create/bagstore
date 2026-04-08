@@ -6,11 +6,17 @@ const app = express();
 
 app.set('trust proxy', 1);
 
-app.use(cors({
+const corsOptions = {
   origin: 'https://jolly-selkie-439537.netlify.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
   credentials: true
-}));
+};
 
+app.use(cors(corsOptions));
+
+// 🔥 VERY IMPORTANT (fix preflight)
+app.options('*', cors(corsOptions));
 app.use(express.json());
 
 
