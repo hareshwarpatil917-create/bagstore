@@ -5,14 +5,12 @@ const db = mysql.createPool({
   user: process.env.MYSQLUSER,
   password: process.env.MYSQLPASSWORD,
   database: process.env.MYSQLDATABASE,
-  port: process.env.MYSQLPORT,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  port: process.env.MYSQLPORT
 }).promise();
 
+// 🔥 Debug log
 db.query('SELECT 1')
   .then(() => console.log('✅ DB Connected'))
-  .catch(err => console.log('❌ DB Error:', err.message));
+  .catch(err => console.log('❌ DB ERROR:', err.message));
 
 module.exports = db;
