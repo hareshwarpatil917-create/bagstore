@@ -7,11 +7,12 @@ const app = express();
 app.set('trust proxy', 1);
 
 app.use(cors({
-  origin: 'https://jolly-selkie-439537.netlify.app/',
+  origin: 'https://jolly-selkie-439537.netlify.app',
   credentials: true
 }));
 
 app.use(express.json());
+
 
 app.use(session({
   secret: 'bagstore_secret',
