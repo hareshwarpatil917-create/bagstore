@@ -7,13 +7,7 @@ const db = mysql.createPool({
   database: 'railway',
   port: 49586,
   waitForConnections: true,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  ssl: { rejectUnauthorized: false }
 }).promise();
-
-db.query('SELECT 1')
-  .then(() => console.log('✅ DB Connected'))
-  .catch(err => console.log('❌ DB Error:', err.message));
 
 module.exports = db;

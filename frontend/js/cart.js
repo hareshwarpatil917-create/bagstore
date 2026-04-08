@@ -8,6 +8,7 @@ async function loadCart() {
     return;
   }
   const res = await fetch(`${API}/cart/user/${user.id}`);
+  credentials: 'include'
   const items = await res.json();
   let total = 0;
   document.getElementById('cart-body').innerHTML = items.length === 0

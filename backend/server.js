@@ -4,10 +4,10 @@ const session = require('express-session');
 
 const app = express();
 
-app.set('trust proxy', 1); // 🔥 IMPORTANT for Railway
+app.set('trust proxy', 1);
 
 app.use(cors({
-  origin: 'https://your-netlify-link.netlify.app',
+  origin: 'https://jolly-selkie-439537.netlify.app/',
   credentials: true
 }));
 
@@ -26,6 +26,10 @@ app.use(session({
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/cart', require('./routes/cart'));
+
+app.get('/', (req, res) => {
+  res.send('Backend Running 🚀');
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

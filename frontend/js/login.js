@@ -1,12 +1,16 @@
+
 const API = 'https://bagstore-production-3209.up.railway.app/api';
 
 async function login() {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
+  credentials: 'include'
   const res = await fetch(`${API}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    
     body: JSON.stringify({ email, password })
+    
   });
   const data = await res.json();
   const msg = document.getElementById('msg');

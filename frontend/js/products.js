@@ -4,6 +4,7 @@ async function loadProducts() {
   try {
     const res = await fetch(`${API}/products`);
     const products = await res.json();
+    credentials: 'include'
     const grid = document.getElementById('products');
     grid.innerHTML = products.map(p => `
       <div class="card">
