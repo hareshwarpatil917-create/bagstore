@@ -1,1 +1,1 @@
-const API = 'http://localhost:3000/api';
+const API = 'https://bagstore-production-3209.up.railway.app/api';
