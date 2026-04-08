@@ -4,24 +4,22 @@ const session = require('express-session');
 
 const app = express();
 
+app.set('trust proxy', 1); // 🔥 IMPORTANT for Railway
+
 app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: 'https://your-netlify-link.netlify.app',
+  credentials: true
 }));
 
-app.options('*', cors());
 app.use(express.json());
 
 app.use(session({
   secret: 'bagstore_secret',
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   cookie: {
-    httpOnly: true,
-    secure: false,
-    sameSite: 'none',
-    maxAge: 24 * 60 * 60 * 1000
+    secure: true,
+    sameSite: 'none'
   }
 }));
 
