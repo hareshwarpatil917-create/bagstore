@@ -1,11 +1,13 @@
 const mysql = require('mysql2');
 
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'Sai@12345',  // ← your MySQL root password
-  database: 'bagstore',
-  waitForConnections: true
+  host: process.env.DB_HOST || 'gondola.proxy.rlwy.net',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || 'HCAcRYAHXbkrdWKJgwuuZhTDuJpkIRNS',
+  database: process.env.DB_NAME || 'railway',
+  port: process.env.DB_PORT || 49586,
+  waitForConnections: true,
+  ssl: { rejectUnauthorized: false }
 });
 
 const db = pool.promise();
