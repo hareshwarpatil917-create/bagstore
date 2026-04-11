@@ -17,11 +17,28 @@ router.get('/user/:user_id', async (req, res) => {
 });
 
 router.post('/add', async (req, res) => {
-  const { product_id, user_id } = req.body;
+  const { product_id, user_id, quantity } = req.body;
   if (!user_id) return res.status(401).json({ error: 'Not logged in' });
   try {
-    await db.query('INSERT INTO cart (user_id, product_id) VALUES (?, ?)', [user_id, product_id]);
-    res.json({ message: 'Added to cart' });
+    // Check if product already in cart
+    const [existing] = await db.query(
+      'SELECT * FROM cart WHERE user_id = ? AND product_id = ?',
+      [user_id, product_id]
+    );
+    if (existing.length > 0) {
+      // Update quantity
+      await db.query(
+        'UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?',
+        [quantity || 1, user_id, product_id]
+      );
+    } else {
+      // Insert new
+      await db.query(
+        'INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)',
+        [user_id, product_id, quantity || 1]
+      );
+    }
+    res.json({ message: 'Added to cart!' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

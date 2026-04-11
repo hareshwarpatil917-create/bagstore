@@ -10,6 +10,11 @@ async function loadProducts() {
         <div class="card-body">
           <h3>${p.name}</h3>
           <div class="price">₹${p.price}</div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty(${p.id}, -1)">−</button>
+            <span id="qty-${p.id}">1</span>
+            <button class="qty-btn" onclick="changeQty(${p.id}, 1)">+</button>
+          </div>
           <button class="btn" onclick="addToCart(${p.id})">Add to Cart</button>
         </div>
       </div>
@@ -19,20 +24,5 @@ async function loadProducts() {
   }
 }
 
-async function addToCart(product_id) {
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (!user) {
-    alert('Please login first!');
-    window.location.href = 'login.html';
-    return;
-  }
-  const res = await fetch(`${API}/cart/add`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ product_id, user_id: user.id })
-  });
-  const data = await res.json();
-  alert(data.message);
-}
-
-loadProducts();
+function changeQty(id, change) {
+  const span = document.getElementById(`qty-${id}`
