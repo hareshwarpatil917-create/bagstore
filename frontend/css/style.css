@@ -104,4 +104,4 @@ nav a:hover { color: #e8c07d; }
   font-weight: bold;
 }
 .qty-btn:hover { background: #e8c07d; color: #1a1a2e; }
-#qty-${p.id} { font-size: 16px; font-weight: 700; min-width: 20px; text-align: center; }
+.qty-display { font-size: 16px; font-weight: 700; min-width: 20px; text-align: center; }
