@@ -30,7 +30,7 @@ router.post('/add', async (req, res) => {
 router.delete('/remove/:id', async (req, res) => {
   try {
     await db.query('DELETE FROM cart WHERE id = ?', [req.params.id]);
-    res.json({ message: 'Removed from cart' });
+    res.json({ message: 'Removed' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

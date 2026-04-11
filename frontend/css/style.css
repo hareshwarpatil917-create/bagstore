@@ -20,6 +20,7 @@ nav a:hover { color: #e8c07d; }
 }
 .hero h1 { font-size: 48px; color: #e8c07d; margin-bottom: 12px; }
 .hero p { font-size: 18px; color: #aaa; margin-bottom: 28px; }
+
 .btn {
   background: #e8c07d;
   color: #1a1a2e;
