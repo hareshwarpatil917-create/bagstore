@@ -1,5 +1,6 @@
 const API = 'https://bagstore-production-3209.up.railway.app/api';
 
+
 async function login() {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
