@@ -22,7 +22,6 @@ async function loadProducts() {
     document.getElementById('products').innerHTML = html;
   } catch (err) {
     document.getElementById('products').innerHTML = '<p>Failed to load products.</p>';
-    console.error(err);
   }
 }
 
@@ -36,20 +35,28 @@ function changeQty(id, change) {
 }
 
 async function addToCart(product_id) {
-  var user = JSON.parse(localStorage.getItem('user'));
+  // ✅ Check if user is logged in first
+  var user = localStorage.getItem('user');
   if (!user) {
-    alert('Please login first!');
+    alert('Please login first to add items to cart!');
     window.location.href = 'login.html';
     return;
   }
+
+  var userObj = JSON.parse(user);
   var quantity = parseInt(document.getElementById('qty-' + product_id).textContent);
-  var res = await fetch(API + '/cart/add', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ product_id: product_id, user_id: user.id, quantity: quantity })
-  });
-  var data = await res.json();
-  alert(data.message);
+
+  try {
+    var res = await fetch(API + '/cart/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ product_id: product_id, user_id: userObj.id, quantity: quantity })
+    });
+    var data = await res.json();
+    alert(data.message || 'Added to cart!');
+  } catch (err) {
+    alert('Something went wrong. Please try again.');
+  }
 }
 
 loadProducts();
